@@ -4,12 +4,18 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { Roles } from 'src/auth/guards/roles.decorator';
+import { UserRole } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
     constructor(private userService: UsersService) {}
 
     @Post()
+    // Things to do:
+    // 1: @Roles(UserRole.JOB_POSTER)
+    // 2: Solve the above error (solved) 
+    // 3: Write swagger documentation for role property in create user DTO
     @ApiOperation({ summary: 'Create a new user' })
     @ApiResponse({ status: 201, description: 'User created successfully' })
     create(@Body() createUserDto: CreateUserDto) {

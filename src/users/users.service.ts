@@ -35,6 +35,8 @@ export class UsersService {
             name: createUserDto.name,
             email: createUserDto.email,
             password: hashedPassword,
+            role: createUserDto.role,
+            // @Roles(UserRole.JOB_SEEKER)
           },
         });
       

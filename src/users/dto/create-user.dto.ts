@@ -1,5 +1,10 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"; 
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
+
+export enum UserRole {
+    JOB_POSTER = 'JOB_POSTER',
+    JOB_SEEKER = 'JOB_SEEKER',
+}
 
 export class CreateUserDto {
 
@@ -20,9 +25,10 @@ export class CreateUserDto {
     @IsNotEmpty()
     password: string;
 
-    // constructor(name: string, email: string, password: string) {
-    //     this.name = name;
-    //     this.email = email;
-    //     this.password = password;
-    // }
+
+    @ApiProperty({ example: 'JOB_SEEKER' })
+    @IsOptional()
+    @IsEnum(UserRole)
+    role?: UserRole;
+
 }

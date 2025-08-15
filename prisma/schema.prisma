@@ -20,4 +20,22 @@ model User {
   email   String   @unique
   password String
   token   String?
+  role     UserRole @default(JOB_SEEKER)
+  jobs    Job[]
+}
+
+
+model Job {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+
+enum UserRole {
+  JOB_POSTER
+  JOB_SEEKER
 }
